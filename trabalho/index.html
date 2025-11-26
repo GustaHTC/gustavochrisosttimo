@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Gustavo Henrique Teixeira Chrisosttimo</title>
+    <style>
+        /* Estilos CSS - Tema claro (padrão) */
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --header-bg: #fff;
+            --section-bg: #fff;
+            --border-color: #ddd;
+            --accent-color: #4a6fa5;
+            --hover-color: #2c4a7a;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Tema escuro */
+        .dark-theme {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --header-bg: #2d2d2d;
+            --section-bg: #2d2d2d;
+            --border-color: #444;
+            --accent-color: #6a93c9;
+            --hover-color: #8bb0e8;
+            --shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Cabeçalho e Navegação */
+        header {
+            background-color: var(--header-bg);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-menu a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-left: 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Seções principais */
+        section {
+            padding: 100px 0 50px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-container {
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto;
+        }
+
+        /* Seção Sobre Mim */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .profile-img {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .profile-img img {
+            width: 100%;
+            max-width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+
+        /* Seção Formação */
+        .education-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background-color: var(--section-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            position: relative;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .timeline-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .institution {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .location {
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item .duration {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* Seção Portfólio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background-color: var(--section-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .portfolio-content h3 {
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .portfolio-content p {
+            margin-bottom: 15px;
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .portfolio-link:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* Seção Contato */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background-color: var(--section-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* Modal de confirmação */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--section-bg);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .modal h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--header-bg);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--header-bg);
+                width: 80%;
+                max-width: 300px;
+                height: calc(100vh - 70px);
+                transition: right 0.3s;
+                box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+                padding: 20px;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 15px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-text {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho com menu de navegação -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Gustavo Chrisosttimo</div>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#sobre" class="nav-link active">Sobre Mim</a></li>
+                <li><a href="#formacao" class="nav-link">Formação</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Seção Sobre Mim - CORRIGIDA -->
+    <section id="sobre">
+        <div class="container section-container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Olá! Meu nome é <strong>Gustavo Henrique Teixeira Chrisosttimo</strong>, tenho 21 anos e nasci em 13 de setembro de 2004.</p>
+                    <p>Sou uma pessoa organizada, dedicada e sempre em busca de aprendizado e autoaperfeiçoamento. Gosto de enfrentar novos desafios e encontrar soluções criativas para problemas complexos.</p>
+                    <p>No meu tempo livre, gosto de estudar novas tecnologias, praticar exercícios físicos e explorar diferentes áreas do conhecimento que possam contribuir para meu crescimento pessoal e profissional.</p>
+                    <p>Atualmente, estou focado em desenvolver minhas habilidades na área de tecnologia, especialmente em Ciência de Dados, e em aplicar esses conhecimentos para criar soluções inovadoras.</p>
+                </div>
+                <div class="profile-img">
+                    <!-- CORREÇÃO: Removida a div duplicada -->
+                   <img src="./images/gustavo-foto.jpg" alt="Gustavo Chrisosttimo">
+                    <!-- Placeholder que aparece se a imagem não carregar -->
+                    <div style="width: 250px; height: 250px; background-color: #4a6fa5; border-radius: 50%; display: none; align-items: center; justify-content: center; color: white; font-size: 1.2rem; margin: 0 auto;">
+                        Foto não carregada
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Formação -->
+    <section id="formacao">
+        <div class="container section-container">
+            <h2 class="section-title">Formação</h2>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="duration">Cursando</div>
+                    <h3>Ciência de Dados</h3>
+                    <div class="institution">Universidade Uninter</div>
+                    <div class="location">Rolândia, PR - Ensino a Distância</div>
+                    <p>Graduação em Ciência de Dados com foco em análise de dados, machine learning, estatística e visualização de dados. Desenvolvimento de habilidades em Python, SQL, ferramentas de BI e técnicas de análise preditiva.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="duration">2022 - 2024</div>
+                    <h3>Análise e Desenvolvimento de Sistemas</h3>
+                    <div class="institution">Unipar - Universidade Paranaense</div>
+                    <div class="location">Rolândia, PR - Ensino Semi-Presencial</div>
+                    <p>Curso superior de tecnologia com ênfase em programação, banco de dados, engenharia de software e desenvolvimento de sistemas. Projetos práticos envolvendo desenvolvimento web, mobile e desktop.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="duration">2017 - 2021</div>
+                    <h3>Ensino Médio Completo</h3>
+                    <div class="institution">Colégio Estadual Souza Naves</div>
+                    <div class="location">Rolândia, PR</div>
+                    <p>Formação geral com foco em preparação para o ensino superior.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Cursos Complementares</h3>
+                    <div class="institution">CNA - Escola de Inglês</div>
+                    <div class="location">Presencial</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Idiomas</h3>
+                    <p><strong>Português:</strong> Nativo<br>
+                       <strong>Inglês:</strong> Avançado (leitura e escrita técnica)<br>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Portfólio -->
+    <section id="portfolio">
+        <div class="container section-container">
+            <h2 class="section-title">Portfólio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        Projeto 1
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Análise de Dados de Varejo</h3>
+                        <p>Projeto de análise de dados de uma rede de supermercados, identificando padrões de vendas e comportamento do consumidor.</p>
+                        <a href="#" class="portfolio-link">Ver Projeto</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        Projeto 2
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Sistema de Gestão de Tarefas</h3>
+                        <p>Desenvolvimento de um sistema web para gestão de tarefas e projetos, com funcionalidades de priorização e acompanhamento.</p>
+                        <a href="#" class="portfolio-link">Ver Projeto</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        Projeto 3
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Dashboard de Métricas de TI</h3>
+                        <p>Criação de um dashboard interativo para monitoramento de métricas de infraestrutura de TI e desempenho de sistemas.</p>
+                        <a href="#" class="portfolio-link">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato">
+        <div class="container section-container">
+            <h2 class="section-title">Contato</h2>
+            <div class="contact-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de confirmação -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Mensagem Enviada!</h3>
+            <p>Sua mensagem foi enviada com sucesso. Entrarei em contato em breve.</p>
+            <button class="close-modal" id="closeModal">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Gustavo Henrique Teixeira Chrisosttimo - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Elementos DOM
+        const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const contactForm = document.getElementById('contactForm');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // Menu responsivo
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link (em dispositivos móveis)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Alternância de tema claro/escuro
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Verificar tema salvo no localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.textContent = '☀️';
+        }
+
+        // Navegação suave para âncoras
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // Atualizar link ativo
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Validação do formulário de contato
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mensagem = document.getElementById('mensagem').value.trim();
+            
+            // Validação básica
+            if (!nome || !email || !mensagem) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            // Validação de e-mail
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um e-mail válido.');
+                return;
+            }
+            
+            // Simulação de envio
+            // Em um caso real, aqui seria feita uma requisição AJAX para o servidor
+            
+            // Limpar formulário
+            contactForm.reset();
+            
+            // Exibir modal de confirmação
+            confirmationModal.style.display = 'flex';
+        });
+
+        // Fechar modal
+        closeModal.addEventListener('click', () => {
+            confirmationModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora dele
+        window.addEventListener('click', (e) => {
+            if (e.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+        });
+
+        // Atualizar link ativo durante a rolagem
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Verificar se a imagem carregou
+        window.addEventListener('load', function() {
+            const img = document.querySelector('.profile-img img');
+            if (img && img.naturalHeight === 0) {
+                console.log('Imagem não carregou - verifique o caminho do arquivo');
+            }
+        });
+    </script>
+</body>
+</html>
