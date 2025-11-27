@@ -182,6 +182,21 @@
             border: 3px solid var(--accent-color);
         }
 
+        .image-error {
+            display: none;
+            width: 250px;
+            height: 250px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin: 0 auto;
+            border: 3px solid var(--accent-color);
+        }
+
         /* Seção Formação */
         .education-timeline {
             max-width: 800px;
@@ -226,7 +241,7 @@
             margin-bottom: 10px;
         }
 
-        /* Seção Portfólio */
+        /* Seção Portfólio - ATUALIZADA COM HOVER */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -239,6 +254,9 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .portfolio-item:hover {
@@ -252,10 +270,27 @@
             align-items: center;
             justify-content: center;
             color: #777;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.05);
         }
 
         .portfolio-content {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .portfolio-content h3 {
@@ -265,6 +300,7 @@
 
         .portfolio-content p {
             margin-bottom: 15px;
+            flex-grow: 1;
         }
 
         .portfolio-link {
@@ -275,6 +311,9 @@
             text-decoration: none;
             border-radius: 4px;
             transition: background-color 0.3s;
+            text-align: center;
+            margin-top: auto;
+            align-self: flex-start;
         }
 
         .portfolio-link:hover {
@@ -425,6 +464,10 @@
             .about-text {
                 min-width: 100%;
             }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -448,7 +491,7 @@
         </div>
     </header>
 
-    <!-- Seção Sobre Mim - CORRIGIDA -->
+    <!-- Seção Sobre Mim -->
     <section id="sobre">
         <div class="container section-container">
             <h2 class="section-title">Sobre Mim</h2>
@@ -460,11 +503,13 @@
                     <p>Atualmente, estou focado em desenvolver minhas habilidades na área de tecnologia, especialmente em Ciência de Dados, e em aplicar esses conhecimentos para criar soluções inovadoras.</p>
                 </div>
                 <div class="profile-img">
-                    <!-- CORREÇÃO: Removida a div duplicada -->
-                   <img src="./images/gustavo-foto.jpg" alt="Gustavo Chrisosttimo">
-                    <!-- Placeholder que aparece se a imagem não carregar -->
-                    <div style="width: 250px; height: 250px; background-color: #4a6fa5; border-radius: 50%; display: none; align-items: center; justify-content: center; color: white; font-size: 1.2rem; margin: 0 auto;">
-                        Foto não carregada
+                    <img src="imagens/gustavo-foto.jpg" 
+                         alt="Gustavo Chrisosttimo"
+                         onerror="this.style.display='none'; document.getElementById('imageError').style.display='flex';">
+                    
+                    <div id="imageError" class="image-error" style="display: none;">
+                        ❌ Erro ao carregar imagem<br>
+                        <small>Verifique: imagens/gustavo-foto.jpg</small>
                     </div>
                 </div>
             </div>
@@ -504,12 +549,13 @@
                     <h3>Cursos Complementares</h3>
                     <div class="institution">CNA - Escola de Inglês</div>
                     <div class="location">Presencial</div>
+                    <p>Cursando inglês Avançado</p>
                 </div>
                 
                 <div class="timeline-item">
                     <h3>Idiomas</h3>
                     <p><strong>Português:</strong> Nativo<br>
-                       <strong>Inglês:</strong> Avançado (leitura e escrita técnica)<br>
+                       <strong>Inglês:</strong> Avançado (leitura e escrita técnica)</p>
                 </div>
             </div>
         </div>
@@ -522,31 +568,35 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="portfolio-img">
-                        Projeto 1
+                        <img src="imagens/MercadoVirtual.jpg" alt="Projeto Mercado Virtual">
                     </div>
                     <div class="portfolio-content">
-                        <h3>Análise de Dados de Varejo</h3>
-                        <p>Projeto de análise de dados de uma rede de supermercados, identificando padrões de vendas e comportamento do consumidor.</p>
-                        <a href="#" class="portfolio-link">Ver Projeto</a>
+                        <h3>Mercado Virtual</h3>
+                        <p>Projeto de Mercado Virtual, feito através de trabalho da faculdade onde analisamos preços de produtos e aplicamos descontos.</p>
+                        <a href="https://github.com/GustaHTC/MercadoVirtual" target="_blank" rel="noopener noreferrer" class="portfolio-link">Ver Projeto</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-img">
-                        Projeto 2
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4a6fa5, #2c4a7a); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">
+                            <img src="imagens/CofrinhoVirtual.jpg">
+                        </div>
                     </div>
                     <div class="portfolio-content">
-                        <h3>Sistema de Gestão de Tarefas</h3>
-                        <p>Desenvolvimento de um sistema web para gestão de tarefas e projetos, com funcionalidades de priorização e acompanhamento.</p>
-                        <a href="#" class="portfolio-link">Ver Projeto</a>
+                        <h3>Sistema de Gestão de Dinheiro (Moedas)</h3>
+                        <p>Desenvolvimento de um sistema de cofrinho onde podemos adicionar dinheiro, como um cofrinho, e fazer suas conversões para outras moedas juntamente com a cotação atual.</p>
+                        <a href="https://github.com/GustaHTC/Cofrinho" target="_blank" rel="noopener noreferrer" class="portfolio-link">Ver Projeto</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-img">
-                        Projeto 3
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #6a93c9, #4a6fa5); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">
+                            <img src="imagens/DashBoard.jpg">
+                        </div>
                     </div>
                     <div class="portfolio-content">
-                        <h3>Dashboard de Métricas de TI</h3>
-                        <p>Criação de um dashboard interativo para monitoramento de métricas de infraestrutura de TI e desempenho de sistemas.</p>
+                        <h3>Dashboard de Produtos</h3>
+                        <p>Criação de um dashboard interativo para monitoramento de métricas de produtos de empresa.</p>
                         <a href="#" class="portfolio-link">Ver Projeto</a>
                     </div>
                 </div>
